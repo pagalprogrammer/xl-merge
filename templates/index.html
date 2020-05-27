@@ -1,12 +1,72 @@
-<!doctype html>
-  {% with messages = get_flashed_messages() %}
-  <title>Upload new File</title>
-  <h1>Upload new File</h1>
-  <form method=post enctype=multipart/form-data>
-    <input type=file name=files multiple>
-    <input type=submit value=Upload>
-  </form>
-  {% for message in messages %}
-  <span style="color:red;">{{ message }}</span>
-  {% endfor %}
-  {% endwith %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="Author" content="pagalprogrammer">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>eXceL Merge</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+  <body style="overflow:hidden;">
+    {% with messages = get_flashed_messages() %}
+    {% for message in messages %}
+    <div class="notification is-danger" style="position:fixed;left:45%;">
+      <button class="delete" onclick="document.querySelector('.notification').style='display:none';"></button>
+      {{ message }}
+    </div>
+    {% endfor %}
+    {% endwith %} 
+    <section class="hero is-fullheight" style="background: url(bg.png);background-position: left;background-size: cover;">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            eXceL Merge
+          </h1>
+          <h2 class="subtitle">
+            Wanna combine those bulky excel files?
+          </h2>
+          <div class="control">
+            <form method=post enctype=multipart/form-data>
+              <div id="file-js-example" class="file has-name">
+                <label class="file-label">
+                  <input class="file-input" type="file" name="files" multiple required>
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label">
+                      Choose files…
+                    </span>
+                  </span>
+                  <span class="file-name">
+                    No file uploaded
+                  </span>
+                </label>
+              </div>
+              <div class="control">
+              <button type="submit" style="background:#165a35;margin:1rem 2rem;" class="button is-large is-link">Yeah! Merge now.</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer" style="position:fixed;bottom:20px;width:100vw;height:15px;padding:1rem;">
+      <div class="content has-text-centered">
+        <p>
+          Crafted with <span class="heart-icon"><i style="color:red;" class="fas fa-heart"></i></span> by <strong><a style="color:#165a35"href="https://pagalprogrammer.dev">pagalprogrammer</a></strong>.
+        </p>
+      </div>
+    </footer>
+    <script>
+      const fileInput = document.querySelector('#file-js-example input[type=file]');
+      fileInput.onchange = () => {
+        if (fileInput.files.length > 0) {
+          const fileName = document.querySelector('#file-js-example .file-name');
+          fileName.textContent = fileInput.files[0].name;
+        }
+      }
+    </script>
+  </body>
+</html>
