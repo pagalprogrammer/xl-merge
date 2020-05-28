@@ -7,6 +7,7 @@ ALLOWED_EXTENSIONS = {'xlsx', 'xls'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.secret_key = os.environ.get('SECRET_KEY', None)
 
 @app.route('/', methods=['GET', 'POST'])
 def index(error=''):
@@ -54,8 +55,4 @@ def merge(filelist):
     out.save(UPLOAD_FOLDER + '\\output.xlsx')
 
 if __name__ == '__main__':
-    app.secret_key = 'super secret key'
-    app.config['SESSION_TYPE'] = 'filesystem'
-
-    app.debug = True
     app.run()
