@@ -48,6 +48,12 @@
               <button type="submit" onMouseOver="this.style.background='#107c41'" onMouseOut="this.style.background='#165a35'" style="background:#165a35;margin:1rem 2rem;" class="button is-large is-link">Yeah! Merge now.</button>
             </div>
             </form>
+            {% if filename %}
+            <h2 class="subtitle">
+              We merged those files for you.
+              <a href="{{ filename }}">Download</a>
+            </h2>
+            {% endif %}
           </div>
         </div>
       </div>
