@@ -2,7 +2,7 @@ import os, glob, openpyxl as xl, random, string
 from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = 'static/uploads'
+UPLOAD_FOLDER = 'tmp/uploads'
 OUTPUT_FOLDER = 'merged'
 ALLOWED_EXTENSIONS = {'xlsx', 'xls'}
 
