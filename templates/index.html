@@ -4,20 +4,20 @@
     <meta name="Author" content="pagalprogrammer">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>eXceL Merge</title>
+    <title>eXceL Merge 🎉🎉</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
   <body style="overflow:hidden;">
     {% with messages = get_flashed_messages() %}
     {% for message in messages %}
-    <div class="notification is-danger" style="position:fixed;left:45%;">
+    <div class="notification is-danger" style="position:fixed;left:5%;top:5%;">
       <button class="delete" onclick="document.querySelector('.notification').style='display:none';"></button>
       {{ message }}
     </div>
     {% endfor %}
-    {% endwith %} 
-    <section class="hero is-fullheight" style="background: url(bg.png);background-position: left;background-size: cover;">
+    {% endwith %}
+    <section class="hero is-fullheight" style="background: url({{ url_for('static', filename='img/bg.png') }});background-position: top;background-size: contain;background-repeat: no-repeat;">
       <div class="hero-body">
         <div class="container">
           <h1 class="title">
@@ -28,14 +28,14 @@
           </h2>
           <div class="control">
             <form method=post enctype=multipart/form-data>
-              <div id="file-js-example" class="file has-name">
+              <div id="file-js" class="file has-name">
                 <label class="file-label">
-                  <input class="file-input" type="file" name="files" multiple required>
+                  <input class="file-input" type="file" name="files" multiple required accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
                   <span class="file-cta">
                     <span class="file-icon">
                       <i class="fas fa-upload"></i>
                     </span>
-                    <span class="file-label">
+                    <span class="file-label inner-file-label">
                       Choose files…
                     </span>
                   </span>
@@ -45,26 +45,32 @@
                 </label>
               </div>
               <div class="control">
-              <button type="submit" style="background:#165a35;margin:1rem 2rem;" class="button is-large is-link">Yeah! Merge now.</button>
+              <button type="submit" onMouseOver="this.style.background='#107c41'" onMouseOut="this.style.background='#165a35'" style="background:#165a35;margin:1rem 2rem;" class="button is-large is-link">Yeah! Merge now.</button>
             </div>
             </form>
           </div>
         </div>
       </div>
     </section>
-    <footer class="footer" style="position:fixed;bottom:20px;width:100vw;height:15px;padding:1rem;">
+    <footer class="footer" style="position:fixed;bottom:0px;width:100vw;height:45px;padding:0.5rem;">
       <div class="content has-text-centered">
         <p>
           Crafted with <span class="heart-icon"><i style="color:red;" class="fas fa-heart"></i></span> by <strong><a style="color:#165a35"href="https://pagalprogrammer.dev">pagalprogrammer</a></strong>.
         </p>
       </div>
     </footer>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script>
-      const fileInput = document.querySelector('#file-js-example input[type=file]');
+      const fileInput = document.querySelector('#file-js input[type=file]');
       fileInput.onchange = () => {
-        if (fileInput.files.length > 0) {
-          const fileName = document.querySelector('#file-js-example .file-name');
-          fileName.textContent = fileInput.files[0].name;
+        const fileName = document.querySelector('#file-js .file-name');
+        const fileLabel = document.querySelector('.inner-file-label');
+        if (fileInput.files.length == 1) {
+          fileName.textContent = 'Seriously? Only One? 😑';
+          fileLabel.textContent = fileInput.files.length + ' File';
+        }else if (fileInput.files.length > 1) {
+          fileName.textContent = 'Ready whenever you are! 😎';
+          fileLabel.textContent = fileInput.files.length + ' Files';
         }
       }
     </script>

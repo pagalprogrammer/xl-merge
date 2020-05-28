@@ -27,6 +27,9 @@ def index(error=''):
             else:
                 flash('Unsupported File type: Only .xls and .xlsx files are allowed.')
                 return redirect(request.url)
+        if len(filelist) == 1:
+            flash('How do you expect us to merge one file?')
+            return redirect(request.url)
         merge(filelist)
         return redirect(url_for('index',
                                 filename='output.xlsx'))
