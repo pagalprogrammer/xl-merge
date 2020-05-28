@@ -7,7 +7,6 @@ OUTPUT_FOLDER = 'merged'
 ALLOWED_EXTENSIONS = {'xlsx', 'xls'}
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = os.environ.get('SECRET_KEY', 'None')
 
 @app.route('/', methods=['GET', 'POST'])
@@ -25,7 +24,7 @@ def index(error=''):
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
                 filelist.append(filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                file.save(os.path.join(UPLOAD_FOLDER, filename))
             else:
                 flash('Unsupported File type: Only .xls and .xlsx files are allowed.')
                 return redirect(request.url)
